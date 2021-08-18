@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.aang23'
-version '1.0'
+version '2.0'
 
 sourceCompatibility = 11
 

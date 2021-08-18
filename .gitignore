@@ -1,8 +1,9 @@
 build/
-.gradle
+.gradle/
 .settings/
 *.class
 .project
+bin/
 
 # Visual Studio Code 
 .settings/
