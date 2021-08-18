@@ -6,7 +6,7 @@ plugins {
 group 'com.aang23'
 version '1.0'
 
-sourceCompatibility = 16
+sourceCompatibility = 11
 
 repositories {
     maven {
