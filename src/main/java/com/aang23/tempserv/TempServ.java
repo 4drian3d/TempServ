@@ -4,11 +4,10 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.server.ServerInfo;
+import com.velocitypowered.api.event.Subscribe;
+import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import org.slf4j.Logger;
 
-import com.velocitypowered.api.command.CommandManager;
-import com.velocitypowered.api.command.CommandMeta;
-import com.velocitypowered.api.event.EventManager;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,15 +24,13 @@ public class TempServ {
     public static Map<String, ServerInfo> registeredServers = new HashMap<String, ServerInfo>();
 
     @Inject
-    public TempServ(ProxyServer lserver, CommandManager commandManager, EventManager eventManager, Logger llogger) {
+    public TempServ(ProxyServer server, Logger logger) {
+        this.server = server;
+        this.logger = logger;
+    }
 
-        server = lserver;
-        logger = llogger;
-        
-        logger.info("Loading TempServ");
-
-        CommandMeta tempserv = commandManager.metaBuilder("tempserv").build();
-
-        commandManager.register(tempserv, new CommandTempServ());
+    @Subscribe
+    public void onProxyInitialization(ProxyInitializeEvent event) {
+		server.getCommandManager().register("tempserv", new CommandTempServ());
     }
 }
